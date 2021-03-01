@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    //依赖插件
+    id 'com.gujun.plugintest'
 }
 
 android {

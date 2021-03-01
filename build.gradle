@@ -4,13 +4,19 @@ buildscript {
     repositories {
         google()
         jcenter()
+
+        //1、自定义插件，jcenter
+        maven {
+            //在还没有收到同步jcenter成功的邮件，先使用下面的地址（jcenter账号下package右上角的链接），如果成功了直接jcenter()就可以了
+            url 'https://dl.bintray.com/gujungujun/MavenRepository'
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        //2、自定义的gradle对应的jcenter插件，<groupId>:<artifactId>:<version>，实在不知道的在jcenter中package找到
+        classpath 'com.gujun.plugin:GradlePlugin-lib:1.0.5'
     }
 }
 
