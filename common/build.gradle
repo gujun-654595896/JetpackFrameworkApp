@@ -29,10 +29,6 @@ dependencies {
         k, v -> api v
     }
 
-    //dagger框架库
-    rootProject.ext.dagger2.each {
-        k, v -> api v
-    }
 
     //注解处理器
     rootProject.ext.compilerLib.each {

@@ -8,11 +8,7 @@ versions.AROUTER_API_VERSION = "1.5.1"
 versions.RECYCLERVIEW = "1.0.0"
 versions.MATERIAL = "1.2.0"
 versions.IMMERSIONBAR = "3.0.0"
-versions.DAGGER = "2.30.1"
 versions.RETROFIT = "2.9.0"
-versions.GREENDAO = "3.3.0"
-versions.SQLCIPHER = "4.4.2"
-versions.GREENDAO_UPGRADE_HELPER = "v2.2.1"
 
 versions.MMKV = "1.0.23"
 
@@ -63,13 +59,6 @@ ext {
             IMMERSIONBAR_KTX       : "com.gyf.immersionbar:immersionbar-ktx:$versions.IMMERSIONBAR"
     ]
 
-    //依赖注入框架，降低代码耦合
-    dagger2 = [
-            DAGGER        : "com.google.dagger:dagger:$versions.DAGGER",
-            DAGGER_ANDROID: "com.google.dagger:dagger-android:$versions.DAGGER"
-
-    ]
-
     //ARouter
     arouter = [
             AROUTER: "com.alibaba:arouter-api:$versions.AROUTER_API_VERSION",
@@ -78,24 +67,13 @@ ext {
     //注解处理器库，这些库必须放在每个用到的Module的配置中，否则报如下异常
     //A failure occurred while executing org.jetbrains.kotlin.gradle.internal.KaptExecution
     compilerLib = [
-            AROUTER_COMPILER: "com.alibaba:arouter-compiler:$versions.AROUTER_COMPILER_VERSION",
-            DAGGER_COMPILER : "com.google.dagger:dagger-compiler:$versions.DAGGER"
+            AROUTER_COMPILER: "com.alibaba:arouter-compiler:$versions.AROUTER_COMPILER_VERSION"
     ]
 
     //网络框架retrofit2
     retrofit2 = [
             RETROFIT     : "com.squareup.retrofit2:retrofit:$versions.RETROFIT",
             RETROFIT_GSON: "com.squareup.retrofit2:converter-gson:$versions.RETROFIT"
-    ]
-
-    //数据库
-    database = [
-            //GreenDao3数据库
-            GREENDAO               : "org.greenrobot:greendao:$versions.GREENDAO",
-            //数据库加密需要的依赖库
-            SQLCIPHER              : "net.zetetic:android-database-sqlcipher:$versions.SQLCIPHER",
-            //数据库升级处理库
-            GREENDAO_UPGRADE_HELPER: "io.github.yuweiguocn:GreenDaoUpgradeHelper:$versions.GREENDAO_UPGRADE_HELPER"
     ]
 
     //简单的三方工具,给base中的utils module使用的
