@@ -1,2 +1,9 @@
+include ':common'
+include ':base:network'
+include ':base:database'
+include ':base:utils'
+include ':business:mine'
+include ':business:media'
+include ':business:home'
 include ':app'
 rootProject.name = "JetpackFrameworkApp"
