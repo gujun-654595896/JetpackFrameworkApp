@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
-      <module name="JetpackFrameworkApp.app" target="1.8" />
-      <module name="JetpackFrameworkApp.business.home" target="1.8" />
-      <module name="JetpackFrameworkApp.business.media" target="1.8" />
-      <module name="JetpackFrameworkApp.business.mine" target="1.8" />
-      <module name="JetpackFrameworkApp.common" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8" />
   </component>
 </project>

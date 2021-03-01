@@ -1,0 +1,70 @@
+apply plugin: 'com.gujun.plugintest'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+//arouter注解处理器需要的参数
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    api project(":common")
+
+    rootProject.ext.compilerLib.each {
+        k, v -> kapt v
+    }
+}
+
+android {
+
+    defaultConfig {
+//        versionCode rootProject.ext.android.versionCode
+//        versionName rootProject.ext.android.versionName
+//        applicationId project.getRootProject().ext.android.applicationId
+
+        //指定项目加载三方库的CPU架构,如果不指定会导致加载所有类型的so，增加APK体积
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
+
+    signingConfigs {
+        debugConfig {
+//            storeFile file(rootProject.file("keystore.jks"))
+//            storePassword "123456"
+//            keyAlias "debug"
+//            keyPassword "123456"
+        }
+        releaseConfig {
+//            storeFile file(rootProject.file("keystore.jks"))
+//            storePassword "123456"
+//            keyAlias "release"
+//            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+        debug {
+            //设置签名
+//            signingConfig signingConfigs.debugConfig
+            zipAlignEnabled true
+            //是否能断点
+            debuggable = true
+
+            buildConfigField("boolean", "IS_DEBUG", rootProject.ext.buildConfigDebug.IS_DEBUG)
+        }
+
+        release {
+            //设置签名
+//            signingConfig signingConfigs.releaseConfig
+            zipAlignEnabled true
+            //是否能断点
+            debuggable = false
+
+            buildConfigField("boolean", "IS_DEBUG", rootProject.ext.buildConfigRelease.IS_DEBUG)
+        }
+    }
+}
