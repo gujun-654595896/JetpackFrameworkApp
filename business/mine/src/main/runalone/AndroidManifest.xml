@@ -2,4 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gujun.mine">
 
+    <application
+        android:name=".app.JetpackApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/mine_ic_launcher"
+        android:label="@string/mine_name"
+        android:roundIcon="@mipmap/mine_ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/MineTheme.JetpackFrameworkApp">
+
+        <activity android:name=".MineTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
 </manifest>
