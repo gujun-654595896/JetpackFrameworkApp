@@ -25,8 +25,8 @@ buildscript {
         //2、自定义的gradle对应的jcenter插件，<groupId>:<artifactId>:<version>，实在不知道的在jcenter中package找到
         classpath 'com.gujun.plugin:GradlePlugin-lib:1.0.7'
 
-        //GreenDao3 plugin
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0'
+        //JetPack Navigation组件的SafeArgs，安全传参的插件
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.2"
     }
 }
 

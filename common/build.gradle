@@ -34,4 +34,9 @@ dependencies {
     rootProject.ext.compilerLib.each {
         k, v -> kapt v
     }
+
+    //JetPack需要单独引入的包
+    rootProject.ext.jetpack.each {
+        k, v -> api v
+    }
 }

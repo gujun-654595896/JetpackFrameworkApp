@@ -11,6 +11,7 @@ versions.IMMERSIONBAR = "3.0.0"
 versions.RETROFIT = "2.9.0"
 
 versions.MMKV = "1.0.23"
+versions.NAVIGATION = "2.3.0"
 
 ext {
 
@@ -80,6 +81,12 @@ ext {
     utils = [
             //MMKV 是腾讯开源的一款基于 mmap 内存映射的 key-value 组件，可替代SharePreference
             MMKV: "com.tencent:mmkv:$versions.MMKV"
+    ]
+
+    //JetPack在Androidx中不存在需要单独引入的包
+    jetpack = [
+            NAVIGATION_FRAGMENT: "androidx.navigation:navigation-fragment:$versions.NAVIGATION",
+            NAVIGATION_UI      : "androidx.navigation:navigation-ui:$versions.NAVIGATION"
     ]
 
 }

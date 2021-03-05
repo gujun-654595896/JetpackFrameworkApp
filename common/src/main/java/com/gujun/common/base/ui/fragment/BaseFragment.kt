@@ -46,6 +46,7 @@ open abstract class BaseFragment : Fragment() {
         initView()
         initData()
         initListener()
+        initOther()
     }
 
     open fun getLayoutView(

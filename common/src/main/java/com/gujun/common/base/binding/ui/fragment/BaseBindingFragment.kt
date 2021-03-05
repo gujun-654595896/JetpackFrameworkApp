@@ -18,7 +18,7 @@ abstract class BaseBindingFragment : BaseFragment() {
     private lateinit var binding: ViewDataBinding
 
     override fun getLayoutView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = DataBindingUtil.setContentView<ViewDataBinding>(requireActivity(), getLayoutId())
+        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
