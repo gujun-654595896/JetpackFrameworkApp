@@ -12,6 +12,7 @@ versions.RETROFIT = "2.9.0"
 
 versions.MMKV = "1.0.23"
 versions.NAVIGATION = "2.3.0"
+versions.PAGING = "3.0.0-alpha12"
 
 ext {
 
@@ -85,8 +86,12 @@ ext {
 
     //JetPack在Androidx中不存在需要单独引入的包
     jetpack = [
+            //Fragment 的navigation
             NAVIGATION_FRAGMENT: "androidx.navigation:navigation-fragment:$versions.NAVIGATION",
-            NAVIGATION_UI      : "androidx.navigation:navigation-ui:$versions.NAVIGATION"
+            NAVIGATION_UI      : "androidx.navigation:navigation-ui:$versions.NAVIGATION",
+
+            //JetPack的 Paging3组件导入包
+            PAGING             : "androidx.paging:paging-runtime:$versions.PAGING"
     ]
 
 }
