@@ -13,6 +13,7 @@ versions.RETROFIT = "2.9.0"
 versions.MMKV = "1.0.23"
 versions.NAVIGATION = "2.3.0"
 versions.PAGING = "3.0.0-alpha12"
+versions.ROOM = "2.2.3"
 
 ext {
 
@@ -92,6 +93,18 @@ ext {
 
             //JetPack的 Paging3组件导入包
             PAGING             : "androidx.paging:paging-runtime:$versions.PAGING"
+    ]
+
+    //JetPack的 ROOM组件导入包
+    jetpack_room = [
+            ROOM    : "androidx.room:room-runtime:$versions.ROOM",
+            //如果room使用‘协程’相关的得加上此库
+            ROOM_KTX: "androidx.room:room-ktx:$versions.ROOM"
+    ]
+
+    //JetPack的 ROOM组件注解处理器
+    jetpack_room_compilerLib = [
+            ROOM_COMPILER: "androidx.room:room-compiler:$versions.ROOM"
     ]
 
 }

@@ -1,3 +1,28 @@
 apply plugin: 'com.android.library'
 //将APP共用的配置放在一个文件管理
 apply from: rootProject.file('libbase.gradle')
+
+android {
+
+    defaultConfig {
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                //配置JetPack的Room数据库表结构的json文件输出路径，当@Database注解参数exportSchema = true时才需要配置
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+}
+
+dependencies {
+    //3、数据库包
+    rootProject.ext.jetpack_room.each {
+        k, v -> implementation v
+    }
+
+    //注解处理器
+    rootProject.ext.jetpack_room_compilerLib.each {
+        k, v -> kapt v
+    }
+}

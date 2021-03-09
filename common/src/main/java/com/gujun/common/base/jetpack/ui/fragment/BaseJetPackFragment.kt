@@ -36,12 +36,32 @@ abstract class BaseJetPackFragment : BaseBindingFragment() {
     }
 
     /**
+     * Fragment作为AndroidViewModel的生命周期
+     */
+    fun <T : ViewModel> getFragmentAndroidViewModel(modelClass: Class<T>): T {
+        return ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory(this.requireActivity().application)
+        ).get(modelClass)
+    }
+
+    /**
      * Activity作为ViewModel的生命周期
      */
     fun <T : ViewModel> getActivityViewModel(modelClass: Class<T>): T {
         return ViewModelProvider(
-            requireActivity(),
+            this,
             ViewModelProvider.NewInstanceFactory()
+        ).get(modelClass)
+    }
+
+    /**
+     * Activity作为AndroidViewModel的生命周期
+     */
+    fun <T : ViewModel> getActivityAndroidViewModel(modelClass: Class<T>): T {
+        return ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(modelClass)
     }
 
@@ -50,7 +70,17 @@ abstract class BaseJetPackFragment : BaseBindingFragment() {
      */
     fun <T : ViewModel> getApplicationViewModel(modelClass: Class<T>): T {
         return ViewModelProvider(
-            requireActivity().applicationContext as BaseApplication,
+            requireActivity().application as BaseApplication,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(modelClass)
+    }
+
+    /**
+     * Application作为AndroidViewModel的生命周期
+     */
+    fun <T : ViewModel> getApplicationAndroidViewModel(modelClass: Class<T>): T {
+        return ViewModelProvider(
+            requireActivity().application as BaseApplication,
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(modelClass)
     }

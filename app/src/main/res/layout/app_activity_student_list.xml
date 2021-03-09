@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.gujun.jetpack.viewmodel.MainActivityViewModel" />
+            type="com.gujun.jetpack.viewmodel.StudentListViewModel" />
 
         <variable
             name="click"
@@ -26,28 +26,28 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/toNavigationHost"
+            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:onClick="@{click}"
-            android:text="to_navigation_host_page" />
+            android:text="add" />
 
         <Button
-            android:id="@+id/toStudentList"
+            android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:onClick="@{click}"
-            android:text="to_room_list" />
+            android:text="delete" />
 
         <Button
-            android:id="@+id/updateContent"
+            android:id="@+id/update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="150dp"
             android:onClick="@{click}"
-            android:text="update_content" />
+            android:text="update" />
 
     </FrameLayout>
 </layout>

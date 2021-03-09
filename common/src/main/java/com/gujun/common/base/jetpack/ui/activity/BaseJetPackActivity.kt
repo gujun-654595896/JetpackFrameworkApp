@@ -36,11 +36,31 @@ abstract class BaseJetPackActivity : BaseBindingActivity() {
     }
 
     /**
+     * Activity作为AndroidViewModel的生命周期
+     */
+    fun <T : ViewModel> getActivityAndroidViewModel(modelClass: Class<T>): T {
+        return ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory(this.application)
+        ).get(modelClass)
+    }
+
+    /**
      * Application作为ViewModel的生命周期
      */
     fun <T : ViewModel> getApplicationViewModel(modelClass: Class<T>): T {
         return ViewModelProvider(
-            this.applicationContext as BaseApplication,
+            this.application as BaseApplication,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(modelClass)
+    }
+
+    /**
+     * Application作为AndroidViewModel的生命周期
+     */
+    fun <T : ViewModel> getApplicationAndroidViewModel(modelClass: Class<T>): T {
+        return ViewModelProvider(
+            this.application as BaseApplication,
             ViewModelProvider.AndroidViewModelFactory(application)
         ).get(modelClass)
     }
