@@ -11,6 +11,8 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * 参考：https://juejin.cn/post/6844903917281607687#heading-1
+ *
+ * 将Retrofit的Call对象适配成LiveData
  */
 
 class LiveDataCallAdapter<T>(private val responseType: Type) : CallAdapter<T, LiveData<T>> {
