@@ -1,25 +1,24 @@
 package com.gujun.jetpack.ui.activity
 
-import android.content.Intent
 import android.view.View
+import androidx.lifecycle.Observer
 import com.gujun.common.base.binding.ui.config.BindingVariableConfig
 import com.gujun.common.base.jetpack.ui.activity.BaseJetPackActivity
 import com.gujun.jetpack.BR
 import com.gujun.jetpack.R
-import com.gujun.jetpack.viewmodel.MainActivityViewModel
+import com.gujun.jetpack.viewmodel.NetListViewModel
 
 /**
  *    author : gujun
- *    date   : 2021/3/1 15:47
+ *    date   : 2021/3/9 14:36
  *    desc   :
  */
-class MainActivity : BaseJetPackActivity(), View.OnClickListener {
+class NetListActivity : BaseJetPackActivity(), View.OnClickListener {
 
-    private lateinit var viewModel: MainActivityViewModel
-
+    private lateinit var viewModel: NetListViewModel
 
     override fun initViewModel() {
-        viewModel = getActivityViewModel(MainActivityViewModel::class.java)
+        viewModel = getActivityViewModel(NetListViewModel::class.java)
     }
 
     override fun getBindingConfig(): BindingVariableConfig? {
@@ -29,7 +28,7 @@ class MainActivity : BaseJetPackActivity(), View.OnClickListener {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.app_activity_main
+        return R.layout.app_activity_net_list
     }
 
     override fun isSetImmersionBar(): Boolean {
@@ -46,14 +45,16 @@ class MainActivity : BaseJetPackActivity(), View.OnClickListener {
 
     }
 
+    override fun initOther() {
+        super.initOther()
+        viewModel.getAllData().observe(this, Observer {
+            val stringBuilder = StringBuilder()
+            it.data?.forEach { item -> stringBuilder.append(item.title).append("\n") }
+            viewModel.updateContent(stringBuilder.toString())
+        })
+    }
+
     override fun onClick(v: View?) {
         if (v == null) return
-        when (v.id) {
-            R.id.toNavigationHost -> startActivity(Intent(this, NavigationHostActivity::class.java))
-            R.id.toStudentList -> startActivity(Intent(this, StudentListActivity::class.java))
-            R.id.toNetList -> startActivity(Intent(this, NetListActivity::class.java))
-            R.id.updateContent -> viewModel.updateContent("我是新的数据")
-        }
-
     }
 }
