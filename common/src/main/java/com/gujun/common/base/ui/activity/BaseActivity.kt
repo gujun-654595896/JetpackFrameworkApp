@@ -1,9 +1,13 @@
 package com.gujun.common.base.ui.activity
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.gujun.common.R
 import com.gujun.common.base.ui.widget.PageStateView
 import com.gyf.immersionbar.ImmersionBar
 
@@ -13,6 +17,12 @@ import com.gyf.immersionbar.ImmersionBar
  *    desc   : Activity基类
  *    功能:设置沉浸式、设置页面stateView
  */
+
+const val STATE_LOADING = 1001
+const val STATE_ERROR = 1002
+const val STATE_EMPTY = 1003
+const val STATE_CONTENT = 1004
+
 open abstract class BaseActivity : AppCompatActivity() {
 
     //沉浸式状态栏的字体是否是深色，默认浅色
@@ -21,18 +31,16 @@ open abstract class BaseActivity : AppCompatActivity() {
     //沉浸式状态栏后页面是否添加padding
     private var immersionBarPadding: Boolean = true
 
-    val STATE_LOADING = 1001
-    val STATE_ERROR = 1002
-    val STATE_EMPTY = 1003
-    val STATE_CONTENT = 1004
-
     //页面状态视图
     private var stateView: PageStateView? = null
+
+    //title视图
+    private var titleView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //设置布局
-        setLayoutView()
+        setContentView(getContentView())
         //沉浸式状态栏
         if (isSetImmersionBar()) {
             setImmersionBar()
@@ -42,6 +50,10 @@ open abstract class BaseActivity : AppCompatActivity() {
         //stateView
         if (needShowStateView()) {
             addStateView()
+        }
+        if (showDefaultToolbar()) {
+            //初始化Toolbar
+            initToolbar()
         }
         //初始化视图
         initView()
@@ -53,9 +65,55 @@ open abstract class BaseActivity : AppCompatActivity() {
         initOther()
     }
 
-    open fun setLayoutView() {
-        setContentView(getLayoutId())
+    /**
+     * 这个是获取展示在系统默认content上的view
+     */
+    private fun getContentView(): View {
+        val inflater = LayoutInflater.from(this)
+        return if (showDefaultToolbar()) {
+            getRealDefaultContentView(getPageContentView(inflater), inflater)
+        } else {
+            getPageContentView(inflater)
+        }
     }
+
+    /**
+     * 这个是获取页面的view
+     */
+    open fun getPageContentView(inflater: LayoutInflater = LayoutInflater.from(this)): View {
+        return inflater.inflate(getLayoutId(), null)
+    }
+
+    /**
+     * 获取页面视图的容器
+     */
+    private fun getRealDefaultContentView(contentView: View, inflater: LayoutInflater): View {
+        //添加了Toolbar后的Content容器
+        val realContentView: ViewGroup =
+            inflater.inflate(R.layout.common_layout_toolbar_content, null) as ViewGroup
+        //布局参数
+        val vl = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        //添加页面视图
+        realContentView.addView(contentView, vl)
+        return realContentView
+    }
+
+    private fun initToolbar() {
+        findViewById<ImageView>(R.id.commonBack).setOnClickListener { onBackPressed() }
+        titleView = findViewById(R.id.commonTitleView)
+    }
+
+    fun setTitle(title: String) {
+        titleView?.text = title
+    }
+
+    /**
+     * 是否展示默认的ToolBar,默认不展示Toolbar
+     */
+    open fun showDefaultToolbar(): Boolean = false
 
     /**
      * 设置页面布局
@@ -165,7 +223,7 @@ open abstract class BaseActivity : AppCompatActivity() {
      */
     private fun addStateView() {
         val rootView = this.window.decorView.findViewById(android.R.id.content) as ViewGroup
-        stateView = PageStateView.addStateView(rootView)
+        stateView = PageStateView.addStateView(rootView, ImmersionBar.getActionBarHeight(this))
         stateView?.setRetryClickListener { onRetryClick(it) }
     }
 

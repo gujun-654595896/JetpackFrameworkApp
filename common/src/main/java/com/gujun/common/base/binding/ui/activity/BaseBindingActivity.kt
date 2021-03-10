@@ -1,5 +1,7 @@
 package com.gujun.common.base.binding.ui.activity
 
+import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.gujun.common.base.binding.ui.config.BindingVariableConfig
@@ -14,9 +16,10 @@ abstract class BaseBindingActivity : BaseActivity() {
 
     private lateinit var binding: ViewDataBinding
 
-    override fun setLayoutView() {
-        binding = DataBindingUtil.setContentView<ViewDataBinding>(this, getLayoutId())
+    override fun getPageContentView(inflater: LayoutInflater): View {
+        binding = DataBindingUtil.inflate(LayoutInflater.from(this), getLayoutId(), null, false)
         binding.lifecycleOwner = this
+        return binding.root
     }
 
     /**

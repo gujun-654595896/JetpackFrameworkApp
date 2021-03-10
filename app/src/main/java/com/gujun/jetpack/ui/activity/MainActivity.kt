@@ -39,7 +39,7 @@ class MainActivity : BaseJetPackActivity(), View.OnClickListener {
     }
 
     override fun initView() {
-
+        setTitle("我是MainActivity")
     }
 
     override fun initData() {
@@ -56,4 +56,9 @@ class MainActivity : BaseJetPackActivity(), View.OnClickListener {
         }
 
     }
+
+    override fun showDefaultToolbar(): Boolean {
+        return true
+    }
+
 }
