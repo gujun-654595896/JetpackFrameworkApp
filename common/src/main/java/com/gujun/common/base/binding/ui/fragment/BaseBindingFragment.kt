@@ -2,7 +2,6 @@ package com.gujun.common.base.binding.ui.fragment
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.gujun.common.base.binding.ui.config.BindingVariableConfig
@@ -17,8 +16,13 @@ abstract class BaseBindingFragment : BaseFragment() {
 
     private lateinit var binding: ViewDataBinding
 
-    override fun getLayoutView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+    override fun getPageContentView(inflater: LayoutInflater): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            getLayoutId(),
+            null,
+            false
+        )
         binding.lifecycleOwner = this
         return binding.root
     }

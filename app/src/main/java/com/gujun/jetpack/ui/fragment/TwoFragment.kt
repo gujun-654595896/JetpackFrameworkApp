@@ -34,4 +34,8 @@ class TwoFragment : BaseJetPackFragment() {
 
     override fun initData() {
     }
+
+    override fun showDefaultToolbar(): Boolean {
+        return true
+    }
 }
