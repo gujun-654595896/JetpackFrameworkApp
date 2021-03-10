@@ -1,4 +1,4 @@
-package com.gujun.database.db.entity
+package com.gujun.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

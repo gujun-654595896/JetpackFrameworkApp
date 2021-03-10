@@ -3,7 +3,7 @@ package com.gujun.jetpack.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.gujun.network.Requester
+import com.gujun.jetpack.repository.NetListRepository
 import com.gujun.network.base.ApiResponse
 import com.gujun.network.model.BannerVO
 
@@ -14,8 +14,10 @@ import com.gujun.network.model.BannerVO
  */
 class NetListViewModel : ViewModel() {
 
+    private val repository: NetListRepository = NetListRepository()
+
     fun getAllData(): LiveData<ApiResponse<List<BannerVO>>> {
-        return Requester.apiService().bannerList()
+        return repository.getAllData()
     }
 
     private val content: ObservableField<String> = ObservableField("还没有数据")

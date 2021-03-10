@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.gujun.common.base.binding.ui.config.BindingVariableConfig
 import com.gujun.common.base.jetpack.ui.activity.BaseJetPackActivity
-import com.gujun.database.db.entity.Student
+import com.gujun.database.entity.Student
 import com.gujun.jetpack.BR
 import com.gujun.jetpack.R
 import com.gujun.jetpack.viewmodel.StudentListViewModel

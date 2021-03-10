@@ -1,8 +1,8 @@
-package com.gujun.database.db.dao
+package com.gujun.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.gujun.database.db.entity.Student
+import com.gujun.database.entity.Student
 
 /**
  *    author : gujun

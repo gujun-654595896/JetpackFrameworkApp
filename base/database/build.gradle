@@ -18,7 +18,7 @@ android {
 dependencies {
     //3、数据库包
     rootProject.ext.jetpack_room.each {
-        k, v -> implementation v
+        k, v -> api v
     }
 
     //注解处理器

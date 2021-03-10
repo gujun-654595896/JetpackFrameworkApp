@@ -5,9 +5,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.gujun.database.db.entity.Student
-import com.gujun.database.repository.StudentRepository
-import kotlinx.coroutines.launch
+import com.gujun.database.entity.Student
+import com.gujun.jetpack.repository.StudentRepository
 
 /**
  *    author : gujun
@@ -16,24 +15,18 @@ import kotlinx.coroutines.launch
  */
 class StudentListViewModel(val app: Application) : AndroidViewModel(app) {
 
-    private val repository: StudentRepository = StudentRepository(app)
+    private val repository: StudentRepository = StudentRepository(app, viewModelScope)
 
     fun addStudent(student: Student) {
-        viewModelScope.launch {
-            repository.addStudent(student)
-        }
+        repository.addStudent(student)
     }
 
     fun updateStudentById(name: String, id: Long) {
-        viewModelScope.launch {
-            repository.updateStudentById(name, id)
-        }
+        repository.updateStudentById(name, id)
     }
 
     fun deleteStudentById(id: Long) {
-        viewModelScope.launch {
-            repository.deleteStudentById(id)
-        }
+        repository.deleteStudentById(id)
     }
 
     fun getAllStudent(): LiveData<List<Student>> {

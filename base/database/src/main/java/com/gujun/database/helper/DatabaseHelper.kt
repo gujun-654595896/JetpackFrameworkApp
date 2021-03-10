@@ -1,11 +1,11 @@
-package com.gujun.database.db.helper
+package com.gujun.database.helper
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.gujun.database.db.dao.StudentDao
-import com.gujun.database.db.entity.Student
+import com.gujun.database.dao.StudentDao
+import com.gujun.database.entity.Student
 
 /**
  *    author : gujun
