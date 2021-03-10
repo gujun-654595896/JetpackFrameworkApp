@@ -2,6 +2,8 @@ package com.gujun.network.livedata
 
 import androidx.lifecycle.LiveData
 import com.gujun.network.base.ApiResponse
+import com.gujun.network.base.ERROR_REQUEST_CODE
+import com.gujun.network.base.ERROR_REQUEST_MSG
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
@@ -26,8 +28,8 @@ class LiveDataCallAdapter<T>(private val responseType: Type) : CallAdapter<T, Li
                         override fun onFailure(call: Call<T>, t: Throwable) {
                             val value = ApiResponse<T>(
                                 null,
-                                -1,
-                                t.message ?: ""
+                                ERROR_REQUEST_CODE,
+                                "$ERROR_REQUEST_MSG ${t.message ?: "UNKNOWN ERROR"}"
                             ) as T
                             postValue(value)
                         }
