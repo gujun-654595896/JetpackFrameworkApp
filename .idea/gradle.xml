@@ -21,6 +21,8 @@
             <option value="$PROJECT_DIR$/business/media" />
             <option value="$PROJECT_DIR$/business/mine" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/keystore" />
+            <option value="$PROJECT_DIR$/lib_aar_module" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
