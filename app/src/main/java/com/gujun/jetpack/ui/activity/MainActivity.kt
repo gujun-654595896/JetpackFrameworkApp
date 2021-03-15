@@ -51,6 +51,7 @@ class MainActivity : BaseJetPackActivity(), View.OnClickListener {
         when (v.id) {
             R.id.toNavigationHost -> startActivity(Intent(this, NavigationHostActivity::class.java))
             R.id.toStudentList -> startActivity(Intent(this, StudentListActivity::class.java))
+            R.id.toPagingList -> startActivity(Intent(this, PagingListActivity::class.java))
             R.id.toNetList -> startActivity(Intent(this, NetListActivity::class.java))
             R.id.updateContent -> viewModel.updateContent("我是新的数据")
         }

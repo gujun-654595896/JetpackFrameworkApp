@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.gujun.common.base.ui.adapter.holder.DataBindingViewHolder
+import com.gujun.common.base.binding.ui.adapter.holder.DataBindingViewHolder
 
 /**
  *    author : gujun

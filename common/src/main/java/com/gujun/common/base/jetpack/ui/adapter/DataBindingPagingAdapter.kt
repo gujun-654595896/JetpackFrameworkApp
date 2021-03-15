@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.gujun.common.base.ui.adapter.holder.DataBindingViewHolder
+import com.gujun.common.base.binding.ui.adapter.holder.DataBindingViewHolder
 
 /**
  *    author : gujun

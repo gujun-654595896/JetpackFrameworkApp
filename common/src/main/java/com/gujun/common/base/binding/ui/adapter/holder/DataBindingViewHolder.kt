@@ -1,4 +1,4 @@
-package com.gujun.common.base.ui.adapter.holder
+package com.gujun.common.base.binding.ui.adapter.holder
 
 import android.view.View
 import androidx.databinding.ViewDataBinding

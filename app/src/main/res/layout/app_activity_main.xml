@@ -50,10 +50,18 @@
             android:text="to_net_list" />
 
         <Button
-            android:id="@+id/updateContent"
+            android:id="@+id/toPagingList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
+            android:onClick="@{click}"
+            android:text="to_paging_list" />
+
+        <Button
+            android:id="@+id/updateContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
             android:onClick="@{click}"
             android:text="update_content" />
 
