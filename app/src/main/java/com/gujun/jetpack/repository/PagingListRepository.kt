@@ -4,8 +4,13 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.asLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.gujun.database.entity.Student
 import com.gujun.database.helper.DatabaseHelper
+import com.gujun.jetpack.datasource.PagingListDataSource
 import com.gujun.jetpack.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -39,5 +44,13 @@ class PagingListRepository(
             MutableLiveData<List<User>>(newList)
         }
     }
+
+    fun getAllData(viewModelScope: CoroutineScope) =
+        Pager(PagingConfig(20, 10, true, 20), initialKey = 0) {
+            PagingListDataSource()
+        }
+            .flow//Paging3使用flow传递数据
+            .cachedIn(viewModelScope)//绑定协程生命周期，必须加上，否则可能崩溃
+            .asLiveData(viewModelScope.coroutineContext)//使用LiveData
 
 }

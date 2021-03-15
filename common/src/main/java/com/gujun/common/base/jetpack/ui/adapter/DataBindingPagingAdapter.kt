@@ -1,6 +1,5 @@
 package com.gujun.common.base.jetpack.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,24 +14,14 @@ import com.gujun.common.base.binding.ui.adapter.holder.DataBindingViewHolder
  *    date   : 2021/1/6 14:40
  *    desc   : databinding 关联Recycler的基类Adapter
  */
-class DataBindingPagingAdapter<T : Any>(diffCallback: DiffUtil.ItemCallback<T>) :
-    PagingDataAdapter<T, DataBindingViewHolder>(diffCallback) {
-    private var layoutId = 0
-    private var itemBRId = 0
-    private var clickListenerVariableId = 0
-    private var l: OnItemViewClickListener<T>? = null
+abstract class DataBindingPagingAdapter<T : Any>(
+    diffCallback: DiffUtil.ItemCallback<T>,
+    private var layoutId: Int = 0,
+    private val itemBRId: Int = 0,
+    private val clickListenerVariableId: Int = 0
+) : PagingDataAdapter<T, DataBindingViewHolder>(diffCallback) {
 
-    constructor(
-        context: Context?,
-        layoutId: Int,
-        itemBRId: Int,
-        clickListenerVariableId: Int,
-        diffCallback: DiffUtil.ItemCallback<T>
-    ) : this(diffCallback) {
-        this.layoutId = layoutId
-        this.itemBRId = itemBRId
-        this.clickListenerVariableId = clickListenerVariableId
-    }
+    private var l: OnItemViewClickListener<T>? = null
 
     fun setOnItemViewClickListener(listener: OnItemViewClickListener<T>) {
         l = listener
@@ -42,6 +31,9 @@ class DataBindingPagingAdapter<T : Any>(diffCallback: DiffUtil.ItemCallback<T>) 
         parent: ViewGroup,
         viewType: Int
     ): DataBindingViewHolder {
+        layoutId = if (layoutId == 0) getLayoutId() else layoutId
+        if (layoutId <= 0)
+            throw IllegalArgumentException("add layoutId in DataBindingAdapter")
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context),
             layoutId,
@@ -55,12 +47,17 @@ class DataBindingPagingAdapter<T : Any>(diffCallback: DiffUtil.ItemCallback<T>) 
 
     override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) {
         val videoListViewHolder = holder as DataBindingViewHolder
-        videoListViewHolder.getBinding()!!.setVariable(itemBRId, getItem(position))
-        if (l != null) videoListViewHolder.getBinding()!!.setVariable(clickListenerVariableId, l)
+        if (itemBRId > 0) videoListViewHolder.getBinding()!!
+            .setVariable(itemBRId, getItem(position))
+        if (l != null && clickListenerVariableId > 0) videoListViewHolder.getBinding()!!
+            .setVariable(clickListenerVariableId, l)
         videoListViewHolder.getBinding()!!.executePendingBindings()
     }
+
+    open fun getLayoutId(): Int = 0
 
     interface OnItemViewClickListener<T> {
         fun onViewClick(v: View?, program: T)
     }
+
 }

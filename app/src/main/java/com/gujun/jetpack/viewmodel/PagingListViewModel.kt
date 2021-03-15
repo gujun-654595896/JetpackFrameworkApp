@@ -5,10 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
-import com.gujun.database.entity.Student
 import com.gujun.jetpack.repository.PagingListRepository
-import com.gujun.jetpack.ui.adapter.BindingListAdapter
-import com.gujun.jetpack.ui.adapter.RecyclerListAdapter
+import com.gujun.jetpack.ui.adapter.PagingListAdapter
+import kotlinx.coroutines.launch
 
 /**
  *    author : gujun
@@ -19,19 +18,17 @@ class PagingListViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repository: PagingListRepository = PagingListRepository(app, viewModelScope)
 
-    private val adapter = BindingListAdapter()
+    private val adapter = PagingListAdapter()
 
-    fun getAdapter(): BindingListAdapter {
+    fun getAdapter(): PagingListAdapter {
         return adapter
     }
 
-    fun addStudent(student: Student) {
-        repository.addStudent(student)
-    }
-
     fun showData(owner: LifecycleOwner) {
-        repository.getAllStudent().observe(owner, Observer {
-            adapter.submitList(it)
+        repository.getAllData(viewModelScope).observe(owner, Observer {
+            viewModelScope.launch {
+                adapter.submitData(it)
+            }
         })
     }
 

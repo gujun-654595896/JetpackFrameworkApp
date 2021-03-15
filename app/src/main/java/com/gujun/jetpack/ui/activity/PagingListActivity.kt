@@ -41,16 +41,6 @@ class PagingListActivity : BaseJetPackActivity() {
         viewModel.showData(this)
     }
 
-    override fun initListener() {
-        add.setOnClickListener {
-            for (i in 20..100) {
-                val student =
-                    Student(sid = i.toLong(), name = "我是$i", age = 10)
-                viewModel.addStudent(student)
-            }
-        }
-    }
-
     override fun isSetImmersionBar(): Boolean {
         return false
     }
